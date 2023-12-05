@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FplUser {
+  fpl_id       Int    @id
+  team_name    String
+  manager_name String
+
+  @@index([team_name])
+  @@index([manager_name])
+  @@index([team_name, manager_name])
+  @@map("fpl_users")
+}
